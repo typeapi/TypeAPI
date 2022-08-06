@@ -1,0 +1,1 @@
+TypeAPI plugin for patameter validate

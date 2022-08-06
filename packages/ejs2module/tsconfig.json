@@ -1,0 +1,32 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "module": "commonjs",
+        "allowJs": false,
+        "noImplicitAny": false,
+        "outDir": "build/",
+        "rootDir": "src/",
+        "sourceMap": true,
+        "moduleResolution": "node",
+        "strictNullChecks": false,
+        "declaration": true,
+        "downlevelIteration": true,
+        "lib": [
+            "es5",
+            "es6"
+        ],
+        "types": [
+            "node"
+        ]
+    },
+    "include": [
+        "src/**/*.ts"
+    ],
+    "exclude": [
+        "src/test/"
+    ],
+    "compileOnSave": false,
+    "typingOptions": {
+        "enableAutoDiscovery": true
+    }
+}

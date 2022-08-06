@@ -1,0 +1,54 @@
+<%
+function toParameters(t,s){
+  let ty = (t||'').toLowerCase();
+  let sc = (s||'').toLowerCase();
+  if(ty==='apikey')
+    return '{ apiKey }: IApiKeyParameters';
+  if(ty==='http'){
+    if(sc==='basic')
+      return '{ userId, password }: IHttpBasicParameters';
+    if(sc==='bearer')
+      return '{ token, format }: IHttpBearerParameters';
+    return '{ schema, requirement }: IHttpParameters';
+  }
+  if(ty==='oauth2')
+    return '{ flows, scopes }: IOauth2Parameters';
+  if(ty==='openidconnect')
+    return '{ openIdConnectUrl, scopes }: IOpenIdConnectParameters';
+  return '{ schema, requirement, parameters }: ISecurityParameters';
+}
+-%>
+import {
+  IContext as ICtx,
+  errorMessage, SecurityError,
+  ISecurityAction, IApiKeyParameters, IHttpBasicParameters, IHttpBearerParameters, IHttpParameters, IOauth2Parameters, IOpenIdConnectParameters, ISecurityParameters
+} from '@typeapi/api-router';
+import { IConnection } from '@typeapi/api-router';
+// if you want use connector specific object in context.connector, import IConnection from connector module. ex:
+// import { IConnection } from '@typeapi/express-connector';
+
+import { ISecurity } from './interface/isecurity';
+
+export interface IContext<T extends IConnection = IConnection> extends ICtx<T> {
+  // extend context type, like parsed user from other action. ex:
+  // user?: { name: string, age?: number }
+}
+
+export interface IOptions {
+  // define service object type which passed in options from register. ex:
+  // dbConn: db;
+}
+
+export class Security implements ISecurity {
+  constructor(private options?: IOptions) {
+  }
+<% Object.keys(model).forEach(name=>{ let security=model[name]; -%>
+  /**
+   * <%- security.description || name %>
+   * @type <%- security.type %>
+   */
+  async <%- name %>(<%- toParameters(security.type,security.scheme) %>, context: IContext): Promise<boolean | errorMessage | SecurityError>{
+    return 'Security not implements.';
+  }
+<% }); -%>
+}

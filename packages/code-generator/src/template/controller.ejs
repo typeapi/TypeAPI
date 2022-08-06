@@ -1,0 +1,48 @@
+<%
+import operationRender from './block/controllerOp';
+-%>
+/// <reference path="./interface/definitions.ts" />
+
+import { ApiRouter, IResult, ApiError, IRouterRegister } from '@typeapi/api-router';
+import { IConnection } from '@typeapi/api-router';
+// if you want use connector specific object in context.connection, import IConnection from connector module. ex:
+// import { IConnection } from '@typeapi/express-connector';
+
+import { IController } from './interface/<%- model.controllerName === '' || model.controllerName === '__default__' ? '' : `${model.controllerName}.` %>interface';
+// export apiInterface for register/apiRouter usage.
+export { apiInterface } from './interface/<%- model.controllerName === '' || model.controllerName === '__default__' ? '' : `${model.controllerName}.` %>interface';
+
+import { IContext as ISecurityContext } from './security';
+import { IContext as IPluginsContext } from './plugins';
+interface IContext extends ISecurityContext<IConnection>, IPluginsContext {
+    // extend context type from plugin or events, like parsed user from security. ex:
+    // user?: { name: string, age?: number }
+}
+export interface IOptions {
+    // define service object type which passed in options from register. ex:
+    // dbConn: db;
+}
+
+export class Controller implements IController, IRouterRegister {
+    constructor(private options?: IOptions) {
+    }
+    /**
+     * for register apiRouter event or plugin.
+     * @param apiRouter - inject apiRouter instance at runtime.
+     */
+    apiRouterRegister(apiRouter: ApiRouter): void {
+        //// register events or plugins here
+        // apiRouter.preRouting(async (ctx) => console.log('invoke preRouting.'), true);
+        // apiRouter.postRouting(async (ctx) => console.log('invoke postRouting.'));
+        // apiRouter.onError(async (ctx, err) => console.log('invoke onError.'));
+        // apiRouter.setPlugin(new Plugin(options));
+        // apiRouter.setStatusCode('default', 200);
+    }
+<% for(const o of model.operations){ -%>
+<%- await operationRender({...(o.operation),path:o.path,method:o.method}) %> {
+        throw new ApiError(500, 'not implements');
+    }
+<% } -%>
+}
+
+

@@ -1,0 +1,22 @@
+<%
+import operationRender from './block/interfaceOp';
+-%>
+/// <reference path="./definitions.ts" />
+
+import { IContext, IResult, IApiInterface } from '@typeapi/api-router';
+
+export interface IController {
+<% for(const o of model.operations){ -%>
+<%- await operationRender({...(o.operation),path:o.path,method:o.method}) %>;
+<% } -%>
+}
+
+export var apiInterface: IApiInterface = {
+    openapiName: '<%- model.openapiName %>',
+    controllerName: '<%- model.controllerName==='__default__' ? '' : model.controllerName %>',
+    serverUrl: '<%- model.serverUrl %>',
+<% if(model.security){ -%>
+    security: <%- JSON.stringify(model.security,null,4) %>,
+<% } -%>
+    operations: <any><%- JSON.stringify(model.operations,null,4) %>
+}

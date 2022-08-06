@@ -1,0 +1,20 @@
+{
+  "name": "@typeapi/plugin-jsonschema-validator",
+  "version": "0.0.2",
+  "description": "plugin for TypeAPI JSON schema validate parameters",
+  "main": "build/app/index.js",
+  "scripts": {
+    "tsc": "tsc",
+    "ver": "npm version --no-git-tag-version patch --force"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@typeapi/api-router": "*",
+    "ajv": "^6.10.0"
+  },
+  "devDependencies": {
+    "@types/node": "^11.11.3",
+    "typescript": "^3.4.4"
+  }
+}

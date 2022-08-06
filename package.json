@@ -1,0 +1,16 @@
+{
+  "name": "@typeapi/typeapi-monorepo",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "bootstrap": "lerna bootstrap",
+    "link": "lerna link"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "lerna": "^3.13.0",
+    "node-machine-id": "^1.1.10"
+  }
+}

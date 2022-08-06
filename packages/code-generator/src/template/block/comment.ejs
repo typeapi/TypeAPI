@@ -1,0 +1,29 @@
+<%
+    let requestDescription = model.requestBody && model.requestBody.content && model.requestBody.content[Object.keys(model.requestBody.content)[0]] && model.requestBody.content[Object.keys(model.requestBody.content)[0]].schema && model.requestBody.content[Object.keys(model.requestBody.content)[0]].schema.description;
+-%>
+    /**
+<% if(model.summary || model.description){ -%>
+     * <%- [model.summary,model.description].filter(v=>!!v).join('\n').replace(/\n/g,'\n     * ') %>
+<% } -%>
+     * @path <%- model.path %>
+     * @method <%- model.method.toUpperCase() %>
+<% if(model.tags && model.tags.length){ -%>
+     * @tags <%- model.tags.join(', ') %>
+<% } -%>
+<% if(model.security && model.security.length){ -%>
+     * @security <%- model.security.map(v=>Object.keys(v).join(' AND ')).map(v=>v.indexOf('AND')>0?`(${v})`:v).join(' OR ') %>
+<% } -%>
+<% if(model.parameters && model.parameters.length){ -%>
+<% model.parameters.forEach((v,i,a)=>{ -%>
+     * @param <%- `${v['x-typeapi-parameter-name']||v.name}` %> - <%- v.schema && `{${v.schema.type}${v.schema.items && ':'+v.schema.items.type || ''}${v.schema.format && ':'+v.schema.format || ''}${v.required&&':required'||''}}`||'' %> <%- v.description %>
+<% }); -%>
+<% } -%>
+<% if(requestDescription){ -%>
+     * @param body <%- requestDescription %>
+<% } -%>
+<% if(model.deprecated){ -%>
+     * ***************************** *
+     * This api has been deprecated. *
+     * ***************************** *
+<% } -%>
+     */

@@ -1,0 +1,20 @@
+{
+  "name": "@typeapi/plugin-parser-timestamps",
+  "version": "0.0.1",
+  "description": "TypeAPI plugin parser time format parameter to context.timestamps",
+  "main": "build/app/index.js",
+  "scripts": {
+    "tsc": "tsc",
+    "ver": "npm version --no-git-tag-version patch --force"
+  },
+  "author": "gkctou@gmail.com",
+  "license": "MIT",
+  "dependencies": {
+    "@typeapi/api-router": "*",
+    "moment-timezone": "^0.5.23"
+  },
+  "devDependencies": {
+    "@types/node": "^11.11.3",
+    "typescript": "^3.3.3333"
+  }
+}

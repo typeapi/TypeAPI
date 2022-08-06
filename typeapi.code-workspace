@@ -1,0 +1,33 @@
+{
+	"folders": [
+		{
+			"name": "api-router",
+			"path": "packages/api-router"
+		},
+		{
+			"name": "code-generator",
+			"path": "packages/code-generator"
+		},
+		{
+			"name": "ejs2module",
+			"path": "packages/ejs2module"
+		},
+		{
+			"name": "express-connector",
+			"path": "packages/express-connector"
+		},
+		{
+			"name": "plugin-jsonschema-validator",
+			"path": "packages/plugin-jsonschema-validator"
+		},
+		{
+			"name": "plugin-parser-timestamps",
+			"path": "packages/plugin-parser-timestamps"
+		},
+		{
+			"name": "express-sample",
+			"path": "packages/express-sample"
+		}
+	],
+	"settings": {}
+}

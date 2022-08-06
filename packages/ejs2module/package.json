@@ -1,0 +1,43 @@
+{
+  "name": "ejs2module",
+  "version": "0.0.117",
+  "description": "compile *.ejs template file to typescript/javascript module",
+  "keywords": [
+    "template",
+    "ejs",
+    "compile",
+    "typescript",
+    "javascript",
+    "module",
+    "precompile",
+    "build"
+  ],
+  "author": "gkctou@gmail.com",
+  "license": "MIT",
+  "bin": {
+    "ejs2module": "index.js"
+  },
+  "scripts": {
+    "tsc": "tsc",
+    "head": "node addCliHead.js",
+    "combine": "npx -p del-cli del dist/ && npx -p @zeit/ncc ncc build build/app/ejs2module.js -o dist/",
+    "minify": "npx -p terser terser dist/index.js -o index.js -c",
+    "build": "npm version --no-git-tag-version patch --force && node syncVersion.js && npm run tsc && npm run head && npm run combine && npm run minify && echo \"builded.\"",
+    "pub": "npm publish --access public",
+    "test": "npx -p del-cli del src/test/render/ && node index.js src/test/template/ src/test/render/ --script ts --async true --localsName model"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^11.11.3",
+    "commander": "^2.19.0",
+    "ejs": "^2.6.1",
+    "globule": "^1.2.1",
+    "mkdirp": "^0.5.1",
+    "node-machine-id": "^1.1.10",
+    "typescript": "^3.3.3333",
+    "webpack": "^4.29.6",
+    "webpack-command": "^0.4.2",
+    "webpack-filter-warnings-plugin": "^1.2.1",
+    "xdeferred": "0.0.4"
+  }
+}

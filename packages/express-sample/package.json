@@ -1,0 +1,28 @@
+{
+  "name": "@typeapi/express-sample",
+  "version": "0.0.2",
+  "private": true,
+  "description": "typeapi express sample",
+  "main": "build/app/index.js",
+  "scripts": {
+    "tsc": "tsc",
+    "coder": "npx -p @typeapi/code-generator@latest api-coder src/openapi/petstore-3.0.openapi.yaml src/router/ -s express -n new",
+    "ver": "npm version --no-git-tag-version patch --force"
+  },
+  "author": "gkctou@gmail.com",
+  "license": "MIT",
+  "dependencies": {
+    "@typeapi/api-router": "*",
+    "@typeapi/express-connector": "*",
+    "@typeapi/plugin-jsonschema-validator": "*",
+    "@typeapi/plugin-parser-timestamps": "*",
+    "express": "^4.16.4",
+    "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.4"
+  },
+  "devDependencies": {
+    "@typeapi/code-generator": "*",
+    "@types/node": "^11.11.3",
+    "typescript": "^3.4.4"
+  }
+}

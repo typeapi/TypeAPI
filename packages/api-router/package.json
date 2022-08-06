@@ -1,0 +1,25 @@
+{
+  "name": "@typeapi/api-router",
+  "version": "0.0.18",
+  "description": "type api core controller",
+  "author": "gkctou@gmail.com",
+  "license": "MIT",
+  "main": "build/app/index.js",
+  "scripts": {
+    "tsc": "tsc",
+    "pack": "webpack --config ./webpack.cli.conf.js",
+    "build": "tsc",
+    "postbuild": "npm version --no-git-tag-version patch --force",
+    "pub": "npm run build && npm publish --access public"
+  },
+  "dependencies": {
+    "openapi-types": "^1.3.4"
+  },
+  "devDependencies": {
+    "@types/node": "^11.11.3",
+    "typescript": "^3.4.4",
+    "webpack": "^4.30.0",
+    "webpack-command": "^0.4.2",
+    "webpack-filter-warnings-plugin": "^1.2.1"
+  }
+}

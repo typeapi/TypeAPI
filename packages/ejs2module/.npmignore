@@ -1,0 +1,13 @@
+.DS_Store
+
+node_modules/
+
+src/
+tsconfig.json
+build/test/
+syncVersion.js
+webpack.cli.conf.js
+addCliHead.js
+
+build/
+dist/

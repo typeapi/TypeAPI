@@ -1,0 +1,46 @@
+{
+  "name": "@typeapi/code-generator",
+  "version": "0.0.34",
+  "description": "openapi server side typescript code generator",
+  "author": "gkctou@gmail.com",
+  "license": "MIT",
+  "bin": {
+    "api-coder": "index.js"
+  },
+  "scripts": {
+    "ejs2m": "ejs2module src/template/ src/render/ --script ts --async true --localsName model",
+    "tsc": "tsc",
+    "versync": "npm version --no-git-tag-version patch --force && node build/script/syncVersion.js",
+    "head": "node build/script/addCliHead.js",
+    "combine": "npx -p del-cli del dist/ && npx -p @zeit/ncc ncc build build/app/cli.js -o dist/",
+    "minify": "npx -p terser terser dist/index.js -o index.js -c",
+    "build": "npm run ejs2m && tsc && npm run versync && npm run head && npm run combine && npm run minify && echo 'builded.'",
+    "pub": "npm publish --access public",
+    "test": "node dist/index.min.js src/test/petstore-3.0.openapi.yaml src/test/generator/ -s express -n new"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@typeapi/api-router": "*",
+    "commander": "^2.20.0",
+    "del": "^4.1.0",
+    "dtsgenerator": "^2.0.6",
+    "js-yaml": "^3.12.2",
+    "json-schema-ref-parser": "^6.1.0",
+    "json-schema-to-typescript": "^6.1.3",
+    "mkdirp": "^0.5.1",
+    "node-machine-id": "^1.1.10",
+    "openapi-jsonschema-parameters": "^1.1.1",
+    "openapi-types": "^1.3.4",
+    "swagger2openapi": "^5.2.3",
+    "xdeferred": "0.0.4",
+    "@typeapi/express-connector": "*",
+    "@typeapi/plugin-jsonschema-validator": "*",
+    "@typeapi/plugin-parser-timestamps": "*",
+    "@types/node": "^11.11.3",
+    "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.4",
+    "ejs2module": "*",
+    "express": "^4.16.4",
+    "typescript": "^3.4.4"
+  }
+}

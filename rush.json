@@ -1,0 +1,44 @@
+{
+    "$schema": "https://developer.microsoft.com/json-schemas/rush/v5/rush.schema.json",
+    "rushVersion": "5.75.0",
+    "pnpmVersion": "7.4.0",
+    "pnpmOptions": {
+        "useWorkspaces": true
+    },
+    "eventHooks": {
+        "preRushInstall": [],
+        "postRushInstall": [],
+        "preRushBuild": [],
+        "postRushBuild": []
+    },
+    "projects": [
+        {
+            "packageName": "@typeapi/api-router",
+            "projectFolder": "packages/api-router"
+        },
+        {
+            "packageName": "@typeapi/code-generator",
+            "projectFolder": "packages/code-generator"
+        },
+        {
+            "packageName": "ejs2module",
+            "projectFolder": "packages/ejs2module"
+        },
+        {
+            "packageName": "@typeapi/express-connector",
+            "projectFolder": "packages/express-connector"
+        },
+        {
+            "packageName": "@typeapi/express-sample",
+            "projectFolder": "packages/express-sample"
+        },
+        {
+            "packageName": "@typeapi/plugin-jsonschema-validator",
+            "projectFolder": "packages/plugin-jsonschema-validator"
+        },
+        {
+            "packageName": "@typeapi/plugin-parser-timestamps",
+            "projectFolder": "packages/plugin-parser-timestamps"
+        }
+    ]
+}

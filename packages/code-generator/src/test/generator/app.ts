@@ -1,0 +1,64 @@
+import * as express from 'express';
+import * as bodyParser from 'body-parser';
+import * as cookieParser from 'cookie-parser';
+
+let app = express();
+/**
+ * express body application/json parser.
+ */
+var jsonParser = bodyParser.json();
+app.use(jsonParser);
+/**
+ * express form body parser(application/x-www-form-urlencoded).
+ */
+var formParser = bodyParser.urlencoded({ extended: false });
+app.use(formParser);
+/**
+ * express cookie parser.
+ */
+app.use(cookieParser());
+
+/**
+ * multi/auto controller register version
+ * setting plugins in plugins.ts
+ */
+import { Connector } from '@typeapi/express-connector';
+import { register, ControllersOptions } from './register';
+let controllersOptions: ControllersOptions = {};
+app.use(register(new Connector(), controllersOptions, apiRouter => void 0).expressRouter());
+
+/**
+ * single/menu controller register version
+ */
+// import { ApiRouter } from '@typeapi/api-router';
+// import { Connector, IConnection } from '@typeapi/express-connector';
+// /**
+//  * import route controllers
+//  */
+// import { apiInterface, Controller, IOptions as IControllerOptions } from './controller';
+// /**
+//  * import security controller
+//  */
+// import { Security, IOptions as ISecurityOptions } from './security';
+// /**
+//  * import api-router plugins
+//  */
+// import { Plugin as Timestamps } from '@typeapi/plugin-parser-timestamps';
+// import { Plugin as SchemaValidator } from '@typeapi/plugin-jsonschema-validator';
+// let options: IControllerOptions & ISecurityOptions = {};
+// app.use(
+//     new ApiRouter<IConnection>({
+//         apiInterface,
+//         controller: new Controller(options),
+//         security: new Security(options),
+//         plugins: [
+//             new Timestamps({ timezone: 'Asia/Taipei' }),
+//             new SchemaValidator({ parametersValidable: true })
+//         ]
+//     }).registerApis(new Connector())
+//         .expressRouter()
+// );
+
+app.listen(3000, err => {
+    console.log('app listen on port 3000...', 'http://localhost:3000');
+});

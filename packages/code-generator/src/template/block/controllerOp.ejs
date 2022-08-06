@@ -1,0 +1,6 @@
+<%
+import commentRender from './comment';
+import operationRender from './operation';
+-%>
+<%- await commentRender(model) %>
+    async <%- await operationRender(model) -%>

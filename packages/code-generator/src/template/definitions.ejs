@@ -1,0 +1,17 @@
+<%- model.definitions %>
+<% if(model.schemas){ -%>
+declare namespace Schemas {
+<% Object.keys(model.schemas).forEach((v,i,a)=>{ -%>    <%- model.schemas[v] %>
+<% }); %><% -%>
+}
+<% } -%>
+<% if(model.parameters && Object.keys(model.parameters).length){ -%>
+declare namespace Parameters {
+<% Object.keys(model.parameters).length && Object.keys(model.parameters).forEach((v,i,a)=>{ -%>
+    export interface <%- v %>{
+<% Object.keys(model.parameters[v]).length && Object.keys(model.parameters[v]).forEach((vv,ii,aa)=>{ %>         <%- vv %>: <%- model.parameters[v][vv] %>;
+<% }); %><% -%>
+    }
+<% }); -%>
+}
+<% } -%>

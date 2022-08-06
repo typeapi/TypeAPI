@@ -1,0 +1,10 @@
+.DS_Store
+
+node_modules/
+
+.vscode/
+src/
+tsconfig.json
+build/test/
+build/script/
+webpack.cli.conf.js

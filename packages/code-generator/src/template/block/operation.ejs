@@ -1,0 +1,17 @@
+<%
+let desctructer = undefined;
+if(model.parameters && model.parameters.length){
+    desctructer = {};
+    for(const p of model.parameters){
+        desctructer[p.in] = desctructer[p.in] || [];
+        desctructer[p.in].push(p['x-typeapi-parameter-name']||p.name);
+    }
+}
+-%>
+<%- model.operationId %>(<% if(desctructer){ %>{<% Object.keys(desctructer).forEach((v,i,a)=>{ %>
+        <%- `${v}: { ${desctructer[v].join(', ')} }` %><%- i===a.length-1?'':',' -%><% }); %>
+    }: <%- model['x-typeapi-parameters-type']||'undefined' %><% }else{ %>parameters: undefined<% } %>, body: <%- model.requestBody && model.requestBody['x-typeapi-request-body'] || 'undefined' %>, context: IContext): Promise<<% -%>
+<% model.responses && Object.keys(model.responses).forEach((v,i,a)=>{ %>
+        IResult<<%- v==='default' && `'default'` || v %>, '<%- model.responses[v].description %>'<%- model.responses[v]['x-typeapi-response'] && `, ${model.responses[v]['x-typeapi-response']}` || '' %>><%- i+1!==a.length && ' |' || '' -%>
+<% }); %>
+    >
