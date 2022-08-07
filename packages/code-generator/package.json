@@ -18,7 +18,7 @@
     "pub": "npm publish --access public",
     "test": "node dist/index.min.js src/test/petstore-3.0.openapi.yaml src/test/generator/ -s express -n new"
   },
-  "dependencies": {},
+  "dependencies": {"ajv":"4.x"},
   "devDependencies": {
     "@typeapi/api-router": "*",
     "commander": "^2.20.0",
